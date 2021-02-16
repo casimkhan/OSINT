@@ -64,8 +64,8 @@ if __name__ == "__main__":
         args = parser.parse_args()
 
         url_in = args.url
-        apikey = '251ca555a6d608bf1194663049e85976'
-        apitoken = 'e691835a2c788c9ac224c1445e4752e847e607aed3cc79e299d68b0721968a5e'
+        apikey = 'Your API Key'
+        apitoken = 'Your Token'
         memurl_list = []
         uname = urlpar(url_in,apikey,apitoken)
         for y in range(len(uname)):
