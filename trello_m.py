@@ -53,25 +53,32 @@ def memboard(memname,apikey,apitoken):
         meminf = response1.json()
         url_list = []
         countm = ((len(meminf)) - 1 )
-        for i in range(countm,0,-1):
+        for i in range(countm,1,-1):
                 mem_url = (meminf[i]['shortUrl'])
                 url_list.append(mem_url)
         return url_list
 
 if __name__ == "__main__":
+
+
         parser = argparse.ArgumentParser(description="This Program will find all the possible boards by Iterating each member from URL")
         parser.add_argument("--url", type=str, help="Trello board url")
         args = parser.parse_args()
 
         url_in = args.url
-        apikey = 'Your API Key'
-        apitoken = 'Your Token'
+        apikey = 'YOUR KEY'
+        apitoken = 'Your token'
+        mem_list = []
         memurl_list = []
         uname = urlpar(url_in,apikey,apitoken)
         for y in range(len(uname)):
                 print('User Name: %s' % uname[y])
                 json_body = memboard(uname[y],apikey,apitoken)
                 for x in range(len(json_body)):
-                        print('URL: %s' % json_body[x])
-                        memurl_list.append(json_body[x])
-        print(len(set(memurl_list)))
+                        if json_body[x] not in memurl_list:
+                                print('New URL : %s' % json_body[x])
+                                memurl_list.append(json_body[x])
+                        else:
+                                print('Duplicate URL')
+
+        print('Total Public board URLs found: %d' % len(set(memurl_list)))
